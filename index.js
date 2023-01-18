@@ -37,6 +37,16 @@ const run = async () => {
       res.send(result);
     });
 
+    app.put("/product/:id", async (req, res) => {
+      const id = req.params.id;
+      const result = await productCollection.updateOne(
+        { _id: ObjectId(id) },
+        { $set: req.body },
+        { upsert: true }
+      );
+      res.send(result);
+    });
+
     app.delete("/product/:id", async (req, res) => {
       const id = req.params.id;
 
